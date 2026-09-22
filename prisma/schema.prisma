@@ -1,0 +1,42 @@
+// Prisma schema for Xiaohongshu Copywriting Tool
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id        String   @id @default(cuid())
+  email     String   @unique
+  password  String
+  nickname  String
+  avatar    String?
+  bio       String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  histories History[]
+}
+model PasswordResetToken {
+  id        String   @id @default(cuid())
+  email     String
+  token     String   @unique  // 存验证码的 SHA256 哈希，不存明文
+  expiresAt DateTime
+  createdAt DateTime @default(now())
+
+  @@index([email])
+}
+
+model History {
+  id         String   @id @default(cuid())
+  userId     String
+  user       User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  title      String
+  sourceText String
+  result     String
+  style      String   @default("viral")
+  createdAt DateTime @default(now())
+}
