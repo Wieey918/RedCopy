@@ -85,7 +85,7 @@ export default function RegisterPage() {
       return
     }
     setSubmitting(true)
-    const result = await register(email, password, nickname)
+    const result = await register(email, password, nickname, code)
     setSubmitting(false)
     if (result.ok) {
       toast.success(t('success'))
