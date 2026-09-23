@@ -126,6 +126,7 @@ export const translations = {
     forgotErrorMissing: "请填写验证码和新密码",
     invalid_code: "验证码错误或已过期",
     send_too_frequent: "发送太频繁，请稍后再试",
+    codePlaceholder: '请输入验证码',
 
     // 注册页
     registerErrorEmail: "邮箱格式不正确",
@@ -397,6 +398,7 @@ export const translations = {
     forgotErrorMissing: "Please enter the code and new password",
     invalid_code: "Invalid or expired code",
     send_too_frequent: "Too many requests. Please try again later",
+    codePlaceholder: 'Enter verification code',
 
     // Register
     registerErrorEmail: "Invalid email format",

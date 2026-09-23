@@ -145,7 +145,7 @@ export default function ForgotPasswordPage() {
                   type="text"
                   value={code}
                   onChange={(e) => setCode(e.target.value)}
-                  placeholder="123456"
+                  placeholder={t('codePlaceholder')}
                   maxLength={6}
                   required
                 />
