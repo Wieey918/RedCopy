@@ -23,7 +23,7 @@ export async function POST(req: NextRequest) {
     }
 
     const code = String(Math.floor(100000 + Math.random() * 900000))
-    saveCode(`register:${email}`, code)
+    await saveCode(`register:${email}`, code)
 
     try {
      await sendVerificationCode(email, code, 'register')
@@ -31,7 +31,6 @@ export async function POST(req: NextRequest) {
      console.error('邮件发送失败:', e)
      return NextResponse.json({ error: 'email_send_failed' }, { status: 502 })
    }
-   console.log(`[注册验证码] ${email}:${code}`)
 
     return NextResponse.json({ ok: true })
   } catch (e) {

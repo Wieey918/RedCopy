@@ -23,14 +23,13 @@ export async function POST(req: NextRequest) {
 
     // 生成 6 位验证码，存入共享 Map（key 与 reset 端 checkCode 完全一致）
     const code = String(Math.floor(100000 + Math.random() * 900000))
-    saveCode(`forgot:${email}`, code)
+    await saveCode(`forgot:${email}`, code)
   try {
      await sendVerificationCode(email, code, 'reset')
    } catch (e) {
      console.error('邮件发送失败:', e)
      return NextResponse.json({ error: 'email_send_failed' }, { status: 502 })
    }
-    console.log(`[密码重置验证码] ${email}:${code}`)
     return NextResponse.json({ ok: true })
   } catch (e) {
     console.error('Forgot password error:', e)

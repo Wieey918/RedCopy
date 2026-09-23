@@ -16,7 +16,7 @@ export async function POST(req: NextRequest) {
     }
 
     // 校验验证码（一次性，成功即消费）
-    if (!checkCode(`forgot:${email}`, code)) {
+    if (!(await checkCode(`forgot:${email}`, code))) {
       return NextResponse.json({ error: 'invalid_code' }, { status: 400 })
     }
 

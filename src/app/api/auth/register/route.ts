@@ -7,7 +7,7 @@ export async function POST(req: NextRequest) {
   try {
     const { email, password, nickname, code } = await req.json()
 
-    if (!email || !password || !nickname) {
+    if (!email || !password || !nickname || !code) {
       return NextResponse.json({ error: 'missing_fields' }, { status: 400 })
     }
 
@@ -25,7 +25,7 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: 'email_exists' }, { status: 409 })
     }
     // 校验注册验证码（一次性，checkCode 成功即消费）
-    if (!checkCode(`register:${email}`, code)) {
+    if (!(await checkCode(`register:${email}`, code))) {
       return NextResponse.json({ error: 'invalid_code' }, { status: 400 })
     }
 
